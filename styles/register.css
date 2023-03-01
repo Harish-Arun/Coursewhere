@@ -30,7 +30,7 @@ header h1{
     margin-right: 20%;
 }
 
-.loginbox{
+.registerbox{
     display: block;
     background: #f8f5fe;
     background-clip: padding-box;
@@ -42,13 +42,13 @@ header h1{
     border-color: #f8f5fe;
 }
 
-.loginbox h1{
+.registerbox h1{
     text-align: center;
     color: #6b3eff;
     font-family: Helvetica, sans-serif;
 }
 
-.loginbox table{
+.registerbox table{
     margin-top: auto;
     width: 80%;
     margin-bottom: auto;
@@ -59,22 +59,22 @@ header h1{
     
 }
 
-.loginbox table td{
+.registerbox table td{
     padding: 10% 7%;
 }
 
-.loginbox label{
+.registerbox label{
     color: #6b3eff; 
     font-size: larger;
     font-family: Helvetica, sans-serif;
 }
-.loginbox input{
+.registerbox input{
     width: 100%;
     padding: 12px 5px;
     
 }
 
-.loginbox input[type="submit"]{
+.registerbox input[type="submit"]{
     width: 25%;
     margin: 5% 40%;
     background-color: #5D3F6A;
@@ -83,7 +83,7 @@ header h1{
 
 
 
-.loginbox input:hover[type="submit"]{
+.registerbox input:hover[type="submit"]{
     background-color: #6b3eff;
 }
 
