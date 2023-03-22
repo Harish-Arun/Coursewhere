@@ -34,11 +34,10 @@ header h1{
     display: block;
     background: #f8f5fe;
     background-clip: padding-box;
-    margin: 10% 30%;
+    margin: 5% 30%;
     padding: 1% 1%;
     height: auto;
     border: solid ;
-    border-width: 75px;
     border-color: #f8f5fe;
 }
 
@@ -52,7 +51,7 @@ header h1{
     margin-top: auto;
     width: 80%;
     margin-bottom: auto;
-    margin-left: 10%;
+    margin-left: 5%;
     margin-right: 10%;
 
     background-color: #f8f5fe;
@@ -60,7 +59,7 @@ header h1{
 }
 
 .registerbox table td{
-    padding: 10% 7%;
+    padding: 6% 6%;
 }
 
 .registerbox label{
@@ -69,7 +68,7 @@ header h1{
     font-family: Helvetica, sans-serif;
 }
 .registerbox input{
-    width: 100%;
+    width: 110%;
     padding: 12px 5px;
     
 }
