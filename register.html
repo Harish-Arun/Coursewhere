@@ -9,8 +9,11 @@
         function validate(){
             var passele=document.getElementById("password")
             var re=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]\\:;'<>,.?\/])(?!.*\s).{8,}$/;
-            if(!re.test(passele.value)){
-                alert('Password wrong type')
+            if(passele.value==""){
+                //pass
+            }
+            else if(!re.test(passele.value)){
+                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.')
             }
         }
 
