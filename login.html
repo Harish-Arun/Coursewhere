@@ -5,6 +5,36 @@
 	<title>Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="styles/login.css">
+	<script type="text/javascript">
+		function validate(){
+
+            var inps=document.getElementsByClassName("logininp");
+            var passele=document.getElementById("password");
+            var re=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]\\:;'<>,.?\/])(?!.*\s).{8,}$/;
+
+            var cond=true;
+            for(let i=0;i<inps.length;i++){
+                if(inps[i].value==""){
+                    cond=false;
+                }
+            }
+            console.log(cond);
+            if(!re.test(passele.value)){
+                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
+				check=false;
+            }
+			
+			if(check && cond){
+				console.log("inside");
+				// var form=document.getElementById("signin");
+				window.location.replace('search.html');
+				// form.submit();
+				
+			}
+
+		}
+
+	</script>
 </head>
 
 <body>
@@ -17,14 +47,15 @@
 
 	<div class="loginbox">
 		<h1>Login</h1>
-		<table>
-		<form method="POST">
+
+		<form method="post" id="signin">
+			<table>
 			<tr>
 				<td>
 					<label for="email">Email</label>
 				</td>
 				<td>
-					<input type="email" id="email" />
+					<input class="logininp" type="email" id="email" required />
 				</td>
 			</tr>
 			
@@ -33,14 +64,14 @@
 					<label for="password">Password</label>
 				</td>
 				<td>
-					<input type="password" id="password" />
+					<input class="logininp" type="password" id="password" required/>
 				</td>
 			</tr>
 			
-		</table>
-		<div class="login">
-			<input type="submit" id="login" value="Login"/>
-		</div>
+			</table>
+			<div class="login">
+				<input type="submit" id="login" value="Login" onclick="validate()"/>
+			</div>
 		</form>
 	</div>
 </body>

@@ -7,13 +7,19 @@
     <title>Register</title>
     <script type="text/javascript">
         function validate(){
-            var passele=document.getElementById("password")
+            var inps=document.getElementsByClassName("reginp");
+            var passele=document.getElementById("password");
             var re=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]\\:;'<>,.?\/])(?!.*\s).{8,}$/;
-            if(passele.value==""){
-                //pass
+
+            var cond=true;
+            for(let i=0;i<inps.length;i++){
+                if(inps[i].value==""){
+                    cond=false;
+                }
             }
-            else if(!re.test(passele.value)){
-                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.')
+            console.log(cond);
+            if((!re.test(passele.value))&&(cond==true)){
+                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
             }
         }
 
@@ -31,13 +37,13 @@
 
         <h1>Register</h1>
         <table>
-            <form method="post">
+            <form method="get" action="search.html">
             <tr>
                 <td>
                     <label for="Name">Name</label>
                 </td>
                 <td>
-                    <input type="text" id="Name" required />
+                    <input class="reginp" type="text" id="Name" required />
                 </td>
             </tr>
             <tr>
@@ -45,7 +51,7 @@
                     <label for="email">Email</label>
                 </td>
                 <td>
-                    <input type="email" id="email" required />
+                    <input class="reginp" type="email" id="email" required />
                 </td>
             </tr>
 
@@ -54,7 +60,7 @@
                     <label for="password">Password</label>
                 </td>
                 <td>
-                    <input type="password" id="password" required />
+                    <input class="reginp" type="password" id="password" required />
                 </td>
             </tr>
 
@@ -63,13 +69,9 @@
                     <label for="DOB">Date of Birth</label>
                 </td>
                 <td>
-                    <input type="date" id="DOB" required />
+                    <input class="reginp" type="date" id="DOB" required />
                 </td>
             </tr>
-
-
-
-
 
         </table>
         <div class="register">
