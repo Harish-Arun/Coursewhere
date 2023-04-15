@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/search.css">
+    <title>Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+    var app=angular.module("searchApp",[]);
+    app.controller("search",function($scope,$http){
+        $http.get("data/db.json")
+        .then(function(response){
+            $scope.datas=response.data;
+        });
+    });
+</script>
+<body ng-app="searchApp">
+    <header>
+        <a href="home.html">
+            <img src="images/logo.png" alt="Logo">
+            </a>
+            <h1> Coursewhere </h1>
+    </header>
+    <div class="search">
+        <p>Search</p>
+
+        <input type="text" placeholder='Enter the course name'>
+    </div>
+
+    <div class="grid-container" ng-controller="search">
+        <div class="grid-item" ng-repeat="data in datas" >
+            <p>{{data.coursename}}</p>
+            
+            <img src="{{data.image}}" alt="{{data.coursename}} Logo">
+            
+            <a href="{{data.link}}">Click here</a>
+        </div>
+
+    </div>
+</body>
+</html>
