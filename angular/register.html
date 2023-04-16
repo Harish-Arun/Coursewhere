@@ -20,16 +20,18 @@
                     cond=false;
                 }
             }
-            console.log(cond);
             if((!re.test(passele.value))&&(cond==true)){
                 alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
+            }
+            else if(cond==true){
+                angular.element(document.getElementById("body")).scope().pass();
             }
         }
 
     </script>
 </head>
 
-<body>
+<body id="body" ng-app="register" ng-controller="registerCtrl">
     <header>
         <a href="home.html">
             <img src="images/logo.png" alt="Logo">
@@ -40,13 +42,13 @@
 
         <h1>Register</h1>
         <table>
-            <form method="get" action="search.html">
+            <form method="POST">
             <tr>
                 <td>
                     <label for="Name">Name</label>
                 </td>
                 <td>
-                    <input class="reginp" type="text" id="Name" required />
+                    <input class="reginp" type="text" id="Name" ng-model="user.name" required />
                 </td>
             </tr>
             <tr>
@@ -54,7 +56,7 @@
                     <label for="email">Email</label>
                 </td>
                 <td>
-                    <input class="reginp" type="email" id="email" required />
+                    <input class="reginp" type="email" id="email" ng-model="user.email" required />
                 </td>
             </tr>
 
@@ -63,7 +65,7 @@
                     <label for="password">Password</label>
                 </td>
                 <td>
-                    <input class="reginp" type="password" id="password" required />
+                    <input class="reginp" type="password" id="password" ng-model="user.password" required/>
                 </td>
             </tr>
 
@@ -72,7 +74,7 @@
                     <label for="DOB">Date of Birth</label>
                 </td>
                 <td>
-                    <input class="reginp" type="date" id="DOB" required />
+                    <input class="reginp" type="date" id="DOB" ng-model="user.dob" required />
                 </td>
             </tr>
 
@@ -81,8 +83,24 @@
             <input type="submit" id="register" value="Register" onclick="validate()">
         </div>
         </form>
+        {{user}}
+        {{msg}}
     </div>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script>
+    var app=angular.module("register",[]);
+    app.controller("registerCtrl",function($scope,$http){
+        $scope.user={name:"",email:"",password:"",dob:""};
+        $scope.msg="no";
+        $scope.pass=function(){
+            console.log($scope.user);
 
+        }
+    });
+            
+
+</script>
 </html>
