@@ -12,13 +12,19 @@
 <script>
     var app=angular.module("searchApp",[]);
     app.controller("search",function($scope,$http){
+        $scope.searchfield="";
         $http.get("data/db.json")
         .then(function(response){
             $scope.datas=response.data;
         });
+        $scope.show=function(data){
+            if(data.coursename.toLowerCase().includes($scope.searchfield.toLowerCase())){
+                return data;
+            }
+        };
     });
 </script>
-<body ng-app="searchApp">
+<body ng-app="searchApp" ng-controller="search">
     <header>
         <a href="home.html">
             <img src="images/logo.png" alt="Logo">
@@ -28,18 +34,27 @@
     <div class="search">
         <p>Search</p>
 
-        <input type="text" placeholder='Enter the course name'>
+        <input type="text" placeholder='Enter the course name' ng-model="searchfield">
     </div>
+    <div class="grid-container">
+        <div class="grid-item" ng-repeat="data in datas |filter: show" >
+            <p>{{data.coursename}}</p>
+            
+            <img src="{{data.image}}" alt="{{data.coursename}} Logo">
+            
+            <a href="{{data.link}}" target="_blank">Click here</a>
+        </div>
 
-    <div class="grid-container" ng-controller="search">
+    </div>
+    <!-- <div class="grid-container">
         <div class="grid-item" ng-repeat="data in datas" >
             <p>{{data.coursename}}</p>
             
             <img src="{{data.image}}" alt="{{data.coursename}} Logo">
             
-            <a href="{{data.link}}">Click here</a>
+            <a href="{{data.link}}" target="_blank">Click here</a>
         </div>
 
-    </div>
+    </div> -->
 </body>
 </html>
