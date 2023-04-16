@@ -1,5 +1,6 @@
 body{
     display: block;
+    font-family: 'Poppins', sans-serif;
 }
 header{
     background-color: #d4c8fa;
@@ -32,6 +33,7 @@ header button{
     height: 40px;
     background-color: #5D3F6A;
     border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 header button:hover{
     background-color: #6b3eff;
