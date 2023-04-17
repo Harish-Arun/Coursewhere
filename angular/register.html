@@ -85,21 +85,24 @@
         </form>
         {{user}}
         {{msg}}
+        <div ng-view></div>
     </div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 <script>
-    var app=angular.module("register",[]);
-    app.controller("registerCtrl",function($scope,$http){
+    var app=angular.module("register",["ngRoute"]);
+    app.controller("registerCtrl",function($scope,$window){
         $scope.user={name:"",email:"",password:"",dob:""};
         $scope.msg="no";
         $scope.pass=function(){
             console.log($scope.user);
-
+            $window.location.replace("/Coursewhere/angular/search.html")
         }
     });
+
+
             
 
 </script>

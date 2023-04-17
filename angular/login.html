@@ -22,25 +22,20 @@
                 }
             }
             console.log(cond);
-            if(!re.test(passele.value)){
+            if((!re.test(passele.value))&& (cond=true)){
                 alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
-				check=false;
             }
 			
-			if(check && cond){
-				console.log("inside");
-				// var form=document.getElementById("signin");
-				window.location.replace('search.html');
-				// form.submit();
-				
-			}
+			else if(cond==true){
+                angular.element(document.getElementById("body")).scope().pass();
+            }
 
 		}
 
 	</script>
 </head>
 
-<body>
+<body id="body" ng-app="login" ng-controller="loginCtrl">
 	<header>
 		<a href="home.html">
 		<img src="images/logo.png" alt="Logo">
@@ -51,23 +46,23 @@
 	<div class="loginbox">
 		<h1>Login</h1>
 
-		<form method="post" id="signin">
+		<form method="post">
 			<table>
 			<tr>
 				<td>
-					<label for="email">Email</label>
+					<label for="email" >Email</label>
 				</td>
 				<td>
-					<input class="logininp" type="email" id="email" required />
+					<input class="logininp" type="email" id="email" ng-model="user.email" required />
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					<label for="password">Password</label>
+					<label for="password" >Password</label>
 				</td>
 				<td>
-					<input class="logininp" type="password" id="password" required/>
+					<input class="logininp" type="password" id="password" ng-model="user.password" required/>
 				</td>
 			</tr>
 			
@@ -77,5 +72,23 @@
 			</div>
 		</form>
 	</div>
+	{{user}}
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script>
+    var app=angular.module("login",["ngRoute"]);
+    app.controller("loginCtrl",function($scope,$window){
+        $scope.user={email:"",password:""};
+        $scope.msg="no";
+        $scope.pass=function(){
+            console.log($scope.user);
+            $window.location.replace("/Coursewhere/angular/search.html")
+        }
+    });
+
+
+            
+
+</script>
 </html>
