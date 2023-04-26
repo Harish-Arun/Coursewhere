@@ -43,32 +43,40 @@
     </header>
     <div class="search">
         <p>Search</p>
-
-        <input type="text" placeholder='Enter the course name' ng-model="searchfield">
+        <div class="search-view">
+            
+            <input type="text" placeholder='Enter the course name' ng-model="searchfield">
+            <select name="view" id="view" ng-model="view">
+                <option value="list">List</option>
+                <option value="grid">Grid</option>
+            </select>
+        </div>
     </div>
-    <select name="view" id="view" ng-model="view">
-        <option value="list">List</option>
-        <option value="grid">Grid</option>
-    </select>
-    {{view}}
 
     <div class="grid-container" ng-show="gridview()">
         <div class="grid-item" ng-repeat="data in datas |filter: show" >
-            <p>{{data.coursename}}</p>
-            
             <img src="{{data.image}}" alt="{{data.coursename}} Logo">
-            
-            <a href="{{data.link}}" target="_blank">Click here</a>
+            <h1>{{data.coursename}}</h1>
+            <span class="grid-authorlink-pair">
+
+                <p>{{data.author}}</p>
+                <a href="{{data.link}}" target="_blank">Click here</a>
+            </span>
         </div>
 
     </div>
     <div class="list-container" ng-show="listview()">
         <div class="list-item" ng-repeat="data in datas |filter: show" >
-            <p>{{data.coursename}}</p>
+            <div class="coursename-image">
+                <h1>{{data.coursename}}</h1>    
+                <img src="{{data.image}}" alt="{{data.coursename}} Logo">
+            </div>
+            <div class="list-description">
+                <p>{{data.author}}</p>
+                <p id="desc">{{data.description}}</p>
+                <a href="{{data.link}}" target="_blank">Click here</a>
+            </div>
             
-            <img src="{{data.image}}" alt="{{data.coursename}} Logo">
-            
-            <a href="{{data.link}}" target="_blank">Click here</a>
         </div>
 
     </div>
