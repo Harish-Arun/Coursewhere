@@ -24,7 +24,8 @@
             console.log(cond);
             if((!re.test(passele.value))&& (cond=true)){
                 alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
-            }
+				cond=false;
+			}
 			
 			else if(cond==true){
                 angular.element(document.getElementById("body")).scope().pass();

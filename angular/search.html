@@ -13,6 +13,7 @@
     var app=angular.module("searchApp",[]);
     app.controller("search",function($scope,$http){
         $scope.searchfield="";
+        $scope.view="";
         $http.get("data/db.json")
         .then(function(response){
             $scope.datas=response.data;
@@ -22,6 +23,15 @@
                 return data;
             }
         };
+        $scope.gridview=function(){
+            if($scope.view=="grid")
+                return true;
+        };
+        $scope.listview=function(){
+            if($scope.view=="list")
+                return true;
+        }
+        
     });
 </script>
 <body ng-app="searchApp" ng-controller="search">
@@ -36,8 +46,24 @@
 
         <input type="text" placeholder='Enter the course name' ng-model="searchfield">
     </div>
-    <div class="grid-container">
+    <select name="view" id="view" ng-model="view">
+        <option value="list">List</option>
+        <option value="grid">Grid</option>
+    </select>
+    {{view}}
+
+    <div class="grid-container" ng-show="gridview()">
         <div class="grid-item" ng-repeat="data in datas |filter: show" >
+            <p>{{data.coursename}}</p>
+            
+            <img src="{{data.image}}" alt="{{data.coursename}} Logo">
+            
+            <a href="{{data.link}}" target="_blank">Click here</a>
+        </div>
+
+    </div>
+    <div class="list-container" ng-show="listview()">
+        <div class="list-item" ng-repeat="data in datas |filter: show" >
             <p>{{data.coursename}}</p>
             
             <img src="{{data.image}}" alt="{{data.coursename}} Logo">
