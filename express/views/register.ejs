@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/register.css">
+    <title>Register</title>
+    <script type="text/javascript">
+        function validate(){
+            var inps=document.getElementsByClassName("reginp");
+            var passele=document.getElementById("password");
+            var re=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]\\:;'<>,.?\/])(?!.*\s).{8,}$/;
+
+            var cond=true;
+            for(let i=0;i<inps.length;i++){
+                if(inps[i].value==""){
+                    cond=false;
+                }
+            }
+            if((!re.test(passele.value))&&(cond==true)){
+                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
+                cond=false;
+            }
+            else if(cond==true){
+                angular.element(document.getElementById("body")).scope().pass();
+            }
+        }
+
+    </script>
+</head>
+
+<body id="body" ng-app="register" ng-controller="registerCtrl">
+    <header>
+        <a href="/">
+            <img src="images/logo.png" alt="Logo">
+        </a>
+        <h1> Coursewhere </h1>
+    </header>
+    <main>
+
+        <div class="registerbox">
+            
+            <h1>Register</h1>
+            <table>
+                <form method="POST" action="/register">
+                    <tr>
+                        <td>
+                            <label for="Name">Name</label>
+                        </td>
+                        <td>
+                            <input class="reginp" type="text" id="Name" ng-model="user.name" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">Email</label>
+                        </td>
+                        <td>
+                            <input class="reginp" type="email" id="email" ng-model="user.email" required />
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label for="password">Password</label>
+                        </td>
+                        <td>
+                            <input class="reginp" type="password" id="password" ng-model="user.password" required/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label for="DOB">Date of Birth</label>
+                        </td>
+                        <td>
+                            <input class="reginp" type="date" id="DOB" ng-model="user.dob" required />
+                        </td>
+                    </tr>
+                    
+                </table>
+                <div class="register">
+                    <input type="submit" id="register" value="Register" onclick="validate()">
+                </div>
+            </form>
+            {{user}}
+            {{msg}}
+            <div ng-view></div>
+        </div>
+    </main>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script>
+    var app=angular.module("register",["ngRoute"]);
+    app.controller("registerCtrl",function($scope,$window){
+        $scope.user={name:"",email:"",password:"",dob:""};
+        $scope.msg="no";
+        $scope.pass=function(){
+            console.log($scope.user);
+            $window.location.replace("/Coursewhere/angular/search.html")
+        }
+    });
+
+
+            
+
+</script>
+</html>

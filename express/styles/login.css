@@ -1,0 +1,102 @@
+body{
+    display: block;
+    margin: 0px;
+    background-color: #eeeeee;
+}
+
+header{   
+    background-color: #d4c8fa;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 80px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px black;
+    border: 10px;
+    align-items: center;
+}
+header img{
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 10px;
+    margin: 1px;
+}
+
+header h1{
+    text-align: center;
+    color: #6b3eff;
+    margin-left: 38%;
+    font-family: Helvetica, sans-serif;
+    margin-right: 20%;
+}
+
+main{
+    position: absolute;
+    width:100%;
+    height:670px;
+}
+
+.loginbox{
+    position: absolute;
+    background: #f8f5fe;
+    margin: 0px;
+    padding: 20px 10px;
+    width: 35em;
+    left: 29%;
+    top: 16%;
+    height: 380px;
+    border-radius: 12px;
+    box-shadow: 0px 0 20px #523b80;
+}
+
+.loginbox h1{
+    text-align: center;
+    color: #6b3eff;
+    font-family: Helvetica, sans-serif;
+}
+
+.loginbox table{
+    margin-top: auto;
+    width: 80%;
+    margin-bottom: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    background-color: #f8f5fe;
+    
+}
+
+.loginbox table td{
+    padding: 6% 6%;
+}
+
+.loginbox label{
+    color: #6b3eff; 
+    font-size: larger;
+    font-family: Helvetica, sans-serif;
+}
+.loginbox input{
+    width: 110%;
+    padding: 12px 5px;
+    
+}
+
+.loginbox input[type="submit"]{
+    width: 25%;
+    margin: 5% 40%;
+    background-color: #5D3F6A;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.loginbox input:hover[type="submit"]{
+    background-color: #6b3eff;
+}
+
+
+
+
+

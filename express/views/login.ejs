@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="Login" content="Login Page">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles/login.css">
+	<script type="text/javascript">
+		function validate(){
+
+            var inps=document.getElementsByClassName("logininp");
+            var passele=document.getElementById("password");
+            var re=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]\\:;'<>,.?\/])(?!.*\s).{8,}$/;
+
+            var cond=true;
+            for(let i=0;i<inps.length;i++){
+                if(inps[i].value==""){
+                    cond=false;
+                }
+            }
+            console.log(cond);
+            if((!re.test(passele.value))&& (cond=true)){
+                alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
+				cond=false;
+			}
+			
+			else if(cond==true){
+                angular.element(document.getElementById("body")).scope().pass();
+            }
+
+		}
+
+	</script>
+</head>
+
+<body id="body" ng-app="login" ng-controller="loginCtrl">
+	<header>
+		<a href="/">
+		<img src="images/logo.png" alt="Logo">
+		</a>
+        <h1> Coursewhere </h1>
+	</header>
+
+	<main>
+
+		<div class="loginbox">
+			<h1>Login</h1>
+	
+			<form method="post" action="/login">
+				<table>
+				<tr>
+					<td>
+						<label for="email" >Email</label>
+					</td>
+					<td>
+						<input class="logininp" type="email" name="email" id="email" ng-model="user.email" required />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label for="password" >Password</label>
+					</td>
+					<td>
+						<input class="logininp" type="password" name="password" id="password" ng-model="user.password" required/>
+					</td>
+				</tr>
+				
+				</table>
+				<div class="login">
+					<input type="submit" id="login" value="Login" onclick="validate()"/>
+				</div>
+			</form>
+		</div>
+
+	</main>
+	{{user}}
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script>
+    var app=angular.module("login",["ngRoute"]);
+    app.controller("loginCtrl",function($scope,$window){
+        $scope.user={email:"",password:""};
+        $scope.msg="no";
+        $scope.pass=function(){
+            console.log($scope.user);
+            //$window.location.replace("/Coursewhere/angular/search.html")
+        }
+    });
+
+
+            
+
+</script>
+</html>
