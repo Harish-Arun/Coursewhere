@@ -12,6 +12,7 @@ header{
     width: auto;
     height: 80px;
     padding: 10px;
+    box-shadow: 0px 0px 10px black;
     border: 10px;
     align-items: center;
 }
