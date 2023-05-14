@@ -18,14 +18,17 @@
             for(let i=0;i<inps.length;i++){
                 if(inps[i].value==""){
                     cond=false;
+                    return cond;
                 }
             }
             if((!re.test(passele.value))&&(cond==true)){
                 alert('Password should be atleast 8 characters.\nMust have an lowercase, uppercase and a special character.');
                 cond=false;
+                return cond;
             }
             else if(cond==true){
                 angular.element(document.getElementById("body")).scope().pass();
+                return cond;
             }
         }
 
@@ -45,13 +48,13 @@
             
             <h1>Register</h1>
             <table>
-                <form method="POST" action="/register">
+                <form method="POST" action="/register" onsubmit="return validate()">
                     <tr>
                         <td>
                             <label for="Name">Name</label>
                         </td>
                         <td>
-                            <input class="reginp" type="text" id="Name" ng-model="user.name" required />
+                            <input class="reginp" type="text" name="Name" id="Name" ng-model="user.name" required />
                         </td>
                     </tr>
                     <tr>
@@ -59,7 +62,7 @@
                             <label for="email">Email</label>
                         </td>
                         <td>
-                            <input class="reginp" type="email" id="email" ng-model="user.email" required />
+                            <input class="reginp" type="email" name="email" id="email" ng-model="user.email" required />
                         </td>
                     </tr>
                     
@@ -68,7 +71,16 @@
                             <label for="password">Password</label>
                         </td>
                         <td>
-                            <input class="reginp" type="password" id="password" ng-model="user.password" required/>
+                            <input class="reginp" type="password" name="password" id="password" ng-model="user.password" required/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="phoneno">Phone Number:</label>
+                        </td>
+                        <td>
+                            <input class="reginp" type="tel" name="phoneno" id="phoneno" ng-model="user.ph" required />
                         </td>
                     </tr>
                     
@@ -77,13 +89,13 @@
                             <label for="DOB">Date of Birth</label>
                         </td>
                         <td>
-                            <input class="reginp" type="date" id="DOB" ng-model="user.dob" required />
+                            <input class="reginp" type="date" name="DOB" id="DOB" ng-model="user.dob" required />
                         </td>
                     </tr>
                     
                 </table>
                 <div class="register">
-                    <input type="submit" id="register" value="Register" onclick="validate()">
+                    <input type="submit" id="register" value="Register">
                 </div>
             </form>
             {{user}}
@@ -98,7 +110,7 @@
 <script>
     var app=angular.module("register",["ngRoute"]);
     app.controller("registerCtrl",function($scope,$window){
-        $scope.user={name:"",email:"",password:"",dob:""};
+        $scope.user={name:"",email:"",password:"",ph:"",dob:""};
         $scope.msg="no";
         $scope.pass=function(){
             console.log($scope.user);

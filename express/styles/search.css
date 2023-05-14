@@ -32,6 +32,22 @@ header h1{
     margin-right: 20%;
 }
 
+header button{
+    margin: 1%;
+    width: 80px;
+    height: 40px;
+    background-color: #5D3F6A;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+header button:hover{
+    background-color: #6b3eff;
+}
+header button a{
+    color:azure;
+    text-decoration: none;
+}
+
 .search{
     display: flex;
     flex-direction: column;

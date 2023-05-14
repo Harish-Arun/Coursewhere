@@ -44,7 +44,7 @@ main{
     width: 35em;
     left: 33%;
     top: 16%;
-    height: 550px;
+    height: 650px;
     border-radius: 12px;
     box-shadow: 0px 0 20px #523b80;
 }
@@ -80,6 +80,8 @@ main{
     padding: 12px 5px;
     
 }
+
+
 
 .registerbox input[type="submit"]{
     width: 25%;
