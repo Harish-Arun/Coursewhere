@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/styles',express.static('styles'));
 app.use('/images',express.static('images'));
 app.use('/data',express.static('data'));
+app.use('/videos',express.static('videos'));
+
 
 var mongoose=require('mongoose');
 mongoose.Promise=global.Promise;

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
-    <!-- <base href="/"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
 </head>
 <body style="margin: 0px;">
@@ -23,8 +23,17 @@
     </header>
 
    <main>
-       <div class="video">
-           <iframe src="https://share.synthesia.io/embeds/videos/1f2252af-97fd-4769-8746-19b52dc47401" frameborder="0"></iframe>
+        <div class="video-container" ng-app="myApp" ng-controller="myCtrl">
+            <video id="my-video" class="video-js" preload="metadata" width="1280" height="720">
+                <source src="/videos/Coursewhere-intro.mp4" type="video/mp4" />
+            </video>
+            <div class="controls">
+                <button class="ctrl" ng-click="skip(-20)">Rewind 20s</button>
+                <button class="ctrl" ng-click="skip(20)">Jump 20s</button>
+                <button class="ctrl" ng-click="pauseVid()">Pause</button>
+                <button class="ctrl" ng-click="playVid()">Play</button>
+                <button class="ctrl" ng-click="restart()">Restart</button>
+            </div>
         </div>
     </main>
 
@@ -39,4 +48,31 @@
         </li>
     </footer>
 </body>
+<script>
+    angular.module('myApp', [])
+    .controller('myCtrl', ['$scope', function($scope) {
+    var videoElement = document.getElementById('my-video');
+    
+    $scope.skip = function(seconds) {
+      videoElement.currentTime += seconds;
+    };
+    
+    $scope.pauseVid = function() {
+      videoElement.pause();
+    };
+    
+    $scope.playVid = function() {
+      videoElement.play();
+    };
+    
+    $scope.restart = function() {
+      videoElement.currentTime = 0;
+      videoElement.play();
+    };
+  }]);
+
+
+
+</script>
+
 </html>
