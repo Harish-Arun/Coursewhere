@@ -121,6 +121,7 @@ app.get('/search',function(req,res){
 
 app.get('/logout',function(req,res){
     req.session.destroy();
+    console.log("Sessoion ended");
     res.redirect('/');
 })
 app.listen(port,host,function(){
