@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 
 
-const host='192.168.29.246';
+const host='127.0.0.1';
 const port=5000;
 
 app.use(bodyParser.json());
@@ -18,7 +18,7 @@ app.use('/videos',express.static('videos'));
 
 var mongoose=require('mongoose');
 mongoose.Promise=global.Promise;
-mongoose.connect("mongodb+srv://harishcriro07:Harish2002@test-cluster.e59v3q9.mongodb.net/Coursewhere");
+mongoose.connect("mongodb://localhost:27017/Coursewhere");
 
 var userSchema= new mongoose.Schema({
     Name: String,
@@ -67,6 +67,7 @@ app.post('/login',function(req,res){
                 if(data.password==password_f){
                     session=req.session;
                     session.userid=data.email;
+                    session.user=data.Name;
                     console.log(req.session);
                     res.redirect("/search");
                 }
@@ -100,7 +101,8 @@ app.post('/register',function(req,res){
         .then(item=>{
             console.log(user);
             session=req.session;
-            session.userid=data.email;
+            session.userid=req.body.email;
+            session.user=req.body.Name;
             console.log(req.session);
             res.redirect("/search");
         })
@@ -110,7 +112,7 @@ app.post('/register',function(req,res){
 });
 app.get('/search',function(req,res){
     if(req.session.userid){
-        res.render("search.ejs");
+        res.render("search.ejs",{using: req.session.user});
     }
     else{
         req.session.error="Acess Denied";
