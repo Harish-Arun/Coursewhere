@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="notes.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-sanitize.js"></script>
+
+<header>
+    <a href="/">
+        <img src="images/logo.png" alt="Logo">
+        </a>
+        <h1> Coursewhere </h1>
+        <button type="button"><a href="/logout">Logout</a></button>  
+</header>
+<body>
+    <div ng-app="myApp" ng-controller="TextEditorController">
+  <div class="menu-bar">
+    <!-- File menu bar -->
+    <ul>
+      <li><a href="#" ng-click="newFile()">New</a></li>
+      <li><a href="#" ng-click="openFile()">Open</a></li>
+      <li><a href="#" ng-click="saveFile()">Save</a></li>
+    </ul>
+  
+    <!-- Edit menu bar -->
+    <ul>
+      <li><a href="#" ng-click="cut()">Cut</a></li>
+      <li><a href="#" ng-click="copy()">Copy</a></li>
+      <li><a href="#" ng-click="paste()">Paste</a></li>
+    </ul>
+  </div>
+  
+  <!-- Text editor -->
+  <div class="texteditor">
+      <textarea rows="5" cols="50" ng-model="text"></textarea>
+      
+      <!-- Buttons -->
+      <span class="buttons">
+            <button ng-click="boldText()">Bold</button>
+            <button ng-click="italicizeText()">Italic</button>
+            <button ng-show="isClipboardSupported" ng-click="pasteFromClipboard()" style="width: auto;">Paste from Clipboard</button>
+      </span>
+      
+    </div>
+</div>
+   
+</body>
+<script>
+    angular.module('myApp', ['ngSanitize'])
+  .controller('TextEditorController', function($scope,$sce) {
+    // Initialize variables
+    $scope.text = '';
+    $scope.isClipboardSupported = false;
+    $scope.filename = '';
+    
+    
+    // Check for clipboard support
+    if (navigator.clipboard) {
+      $scope.isClipboardSupported = true;
+    }
+    
+    // Button click functions
+    $scope.boldText = function() {
+      var selectedText = $scope.getSelectedText();
+      var boldText = '<b>' + selectedText + '</b>';
+      $scope.replaceSelectedText(boldText);
+    };
+    
+    $scope.italicizeText = function() {
+      var selectedText = $scope.getSelectedText();
+      var italicText = '<i>' + selectedText + '</i>';
+      $scope.replaceSelectedText(italicText);
+    };
+    
+    $scope.newFile = function() {
+      $scope.text = '';
+      $scope.filename = '';
+    };
+    
+    $scope.openFile = function() {
+      var fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'text/plain';
+      
+      fileInput.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          $scope.$apply(function() {
+            $scope.text = e.target.result;
+            $scope.filename = file.name;
+          });
+        };
+        
+        reader.readAsText(file);
+      });
+      
+      fileInput.click();
+    };
+    
+    $scope.saveFile = function() {
+      if (!$scope.filename) {
+        $scope.filename = prompt('Enter the filename:');
+        if (!$scope.filename) {
+          return;
+        }
+      }
+      
+      var blob = new Blob([$scope.text], { type: 'text/plain' });
+      var downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = $scope.filename;
+      downloadLink.click();
+    };
+    
+    $scope.cut = function() {
+      var selectedText = $scope.getSelectedText();
+      $scope.replaceSelectedText('');
+      navigator.clipboard.writeText(selectedText);
+    };
+    
+    $scope.copy = function() {
+      var selectedText = $scope.getSelectedText();
+      navigator.clipboard.writeText(selectedText);
+    };
+    
+    $scope.paste = function() {
+      navigator.clipboard.readText()
+        .then(function(clipboardText) {
+          $scope.$apply(function() {
+            $scope.replaceSelectedText(clipboardText);
+          });
+        })
+        .catch(function(error) {
+          console.error('Failed to read clipboard:', error);
+        });
+    };
+    
+    $scope.pasteFromClipboard = function() {
+      navigator.permissions.query({ name: 'clipboard-read' })
+        .then(function(result) {
+          if (result.state === 'granted' || result.state === 'prompt') {
+            $scope.paste();
+          }
+        })
+        .catch(function(error) {
+          console.error('Clipboard permission request failed:', error);
+        });
+    };
+    
+    $scope.getSelectedText = function() {
+      var textarea = document.querySelector('textarea');
+      return textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+    };
+    
+    $scope.replaceSelectedText = function(replacementText) {
+      var textarea = document.querySelector('textarea');
+      var text = textarea.value;
+      var selectionStart = textarea.selectionStart;
+      var selectionEnd = textarea.selectionEnd;
+      textarea.value = text.substring(0, selectionStart) + replacementText + text.substring(selectionEnd);
+    };
+  });
+
+</script>
+</html>
