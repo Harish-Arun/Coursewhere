@@ -18,7 +18,7 @@ app.use('/videos',express.static('videos'));
 
 var mongoose=require('mongoose');
 mongoose.Promise=global.Promise;
-mongoose.connect("mongodb://localhost:27017/Coursewhere");
+mongoose.connect("mongodb+srv://harishcriro07:Harish2002@test-cluster.e59v3q9.mongodb.net/Coursewhere");
 
 var userSchema= new mongoose.Schema({
     Name: String,
@@ -120,6 +120,12 @@ app.get('/search',function(req,res){
     }
 
 });
+
+app.get('/notes',function(req,res){
+    if(req.session.userid){
+        res.render("notes.ejs",{using: req.session.user});
+    }
+})
 
 app.get('/logout',function(req,res){
     req.session.destroy();

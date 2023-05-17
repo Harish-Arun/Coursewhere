@@ -129,3 +129,10 @@ button:hover{
     flex-direction: row;
     justify-content: center;
 }
+
+#user{
+    color: #6b3eff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    margin: 20px;
+}
